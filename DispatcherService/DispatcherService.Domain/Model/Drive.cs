@@ -35,5 +35,4 @@ public class Drive
     /// Идентификатор авто
     /// </summary>
     public required int CarID { get; set; }
-    /// <summary>
-
+}
