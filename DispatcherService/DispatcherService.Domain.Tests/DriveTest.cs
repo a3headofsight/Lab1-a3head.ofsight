@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using DispatcherService.Domain.Services.InMemory;
 
-namespace DispatcherService.Domain.Tests
+namespace DispatcherService.Domain.Tests;
+
+public class DriveTest
 {
-    class DriveTest
+    /// <summary>
+    /// Тест проверяет успешное получение статистики по поездкам водителей.
+    /// </summary>
+    [Fact]
+    public async Task GetDriverTripStatistics_Success()
     {
+        var repo = new DriveInMemoryRepository();
+        var statistics = await repo.GetDriverDriveStats();
+
+        Assert.NotNull(statistics);
     }
 }

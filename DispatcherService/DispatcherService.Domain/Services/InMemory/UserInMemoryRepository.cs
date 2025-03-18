@@ -64,7 +64,7 @@ public class UserInMemoryRepository : IUserRepository
         Task.FromResult((IList<User>)_users);
 
     /// <inheritdoc/>
-    public Task<IList<User>> GetPassengersByTripPeriod(int startDate, int endDate)
+    public Task<IList<User>> GetPassengersDrivePeriod(int startDate, int endDate)
     {
         var passengers = _usersDrives
             .Where(ut => _drives.Any(t => t.ID == ut.DriveID && t.DriveDate >= startDate && t.DriveDate <= endDate))
@@ -80,7 +80,7 @@ public class UserInMemoryRepository : IUserRepository
 
 
     /// <inheritdoc/>
-    public Task<IList<(User user, int tripCount)>> GetTripCountByPassenger()
+    public Task<IList<(User user, int driveCount)>> GetDriveCountPassenger()
     {
         var tripCounts = _usersDrives
             .GroupBy(ut => ut.UserID)
@@ -92,13 +92,13 @@ public class UserInMemoryRepository : IUserRepository
     }
 
     /// <inheritdoc/>
-    public Task<IList<User>> GetTopPassengersByTripPeriod(int startDate, int endDate)
+    public Task<IList<User>> GetTopPassengersDrivePeriod(int startDate, int endDate)
     {
         var topPassengers = _usersDrives
             .Where(ut => _drives.Any(t => t.ID == ut.DriveID && t.DriveDate >= startDate && t.DriveDate <= endDate))
             .GroupBy(ut => ut.UserID)
             .OrderByDescending(g => g.Count())
-            .Select(g => _users.FirstOrDefault(u => u.I == g.Key))
+            .Select(g => _users.FirstOrDefault(u => u.ID == g.Key))
             .Where(u => u != null)
             .Select(u => u!)
             .ToList();

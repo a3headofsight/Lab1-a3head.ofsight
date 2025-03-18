@@ -91,7 +91,7 @@ public class DriverInMemoryRepository : IDriverRepository
     }
 
     /// <inheritdoc/>
-    public Task<IList<(Driver driver, int tripCount)>> GetTopFiveDriveCount()
+    public Task<IList<(Driver driver, int driveCount)>> GetTopFiveDriveCount()
     {
         var topDrivers = _trips
             .GroupBy(t => t.CarID)
@@ -110,7 +110,7 @@ public class DriverInMemoryRepository : IDriverRepository
     }
 
     /// <inheritdoc/>
-    public Task<IList<(Driver driver, int tripCount, double avgTravelTime, int maxTravelTime)>> GetDriverDriveStats()
+    public Task<IList<(Driver driver, int driveCount, double driveTimeAverage, int driveTimeMaximum)>> GetDriverDriveStats()
     {
         var driverStats = _trips
             .GroupBy(t => t.CarID)

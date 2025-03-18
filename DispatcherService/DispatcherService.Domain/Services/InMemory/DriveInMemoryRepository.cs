@@ -66,7 +66,7 @@ public class DriveInMemoryRepository : IDriveRepository
         Task.FromResult((IList<Drive>)_drives);
 
     /// <inheritdoc/>
-    public Task<IList<(Driver driver, int tripCount, double avgTravelTime, int maxTravelTime)>> GetDriverDriveStats()
+    public Task<IList<(Driver driver, int driveCount, double driveTimeAverage, int driveTimeMaximum)>> GetDriverDriveStats()
     {
         var statistics = _drives
             .GroupBy(t => t.CarID)
